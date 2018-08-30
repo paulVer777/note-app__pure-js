@@ -21,12 +21,7 @@
 
 // console.log(dates)
 
-
-
-
-
 const now=moment();
-
 
 const birthday=moment()
 // birthday.year(1991).month(9).date(30)

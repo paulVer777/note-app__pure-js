@@ -28,7 +28,7 @@ const removeNote = function (id) {
 // Generate the DOM structure for a note
 const generateNoteDOM = function (note) {
     const noteEl = document.createElement('div')
-    const a=document.createElement('a')
+    const a = document.createElement('a')
     const textEl = document.createElement('span')
     const button = document.createElement('button')
 
@@ -49,17 +49,28 @@ const generateNoteDOM = function (note) {
     } else {
         textEl.textContent = 'Unnamed note'
     }
-    
-    
+
+
     a.appendChild(textEl)
-    a.setAttribute('href',`/edit.html#${note.id}`)
+    a.setAttribute('href', `/edit.html#${note.id}`)
     noteEl.appendChild(a)
 
     return noteEl
 }
 
+/// sorting function
+
+const sortByFunction = (arr, choice) => {
+
+    if (choice === 'byEdited') return arr.sort((a, b) => a.updatedAt > b.updatedAt ? -1 : 1)
+    else if (choice === 'byCreated') return arr.sort((a, b) => a.createdAt < b.updatedAt ? -1 : 1)
+    else if (choice === 'alphabetically') return arr.sort((a, b) => a.title[0] < b.title[0] ? -1 : 1)
+}
+
 // Render application notes
 const renderNotes = function (notes, filters) {
+    note = sortByFunction(notes, filters.sortBy)
+
     const filteredNotes = notes.filter(function (note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
     })
@@ -72,15 +83,14 @@ const renderNotes = function (notes, filters) {
     })
 }
 
-
 //// function that calculates how many time passed since last edition of note
 
-const getLastEditedTime=(since)=>{
+const getLastEditedTime = (since) => {
 
-    const a=moment(since)
-    const b=moment()
-    
+    const a = moment(since)
+    const b = moment()
+
     return `Last edited ${a.from(b)}`
-    
 
-    }
+
+}

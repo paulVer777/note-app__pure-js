@@ -18,14 +18,10 @@ title.value = note.title
 const body = document.querySelector('#body')
 body.value = note.body
 
-
 ////// Last edited
 
 const span = document.querySelector('#lastEdited')
 span.textContent = getLastEditedTime(note.updatedAt)
-
-
-
 
 ///////////////////////////   Edites the title of note
 
